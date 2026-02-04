@@ -1,6 +1,7 @@
 "use client";
 
-import HTMLFlipBook from "react-pageflip";
+import HTMLFlipBookImport from "react-pageflip";
+const HTMLFlipBook: any = HTMLFlipBookImport;
 import { pdfjs } from "react-pdf";
 import { useEffect, useState, useRef } from "react";
 
