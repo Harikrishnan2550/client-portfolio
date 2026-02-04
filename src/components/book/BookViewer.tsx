@@ -54,10 +54,10 @@ export default function BookViewer() {
           canvas.width = viewport.width;
           canvas.height = viewport.height;
 
-          // Important: pass BOTH canvas and canvasContext
+          // FIXED: must include BOTH canvasContext and canvas
           await page.render({
             canvasContext: ctx,
-            canvas: canvas,           // ← required by newer pdfjs
+            canvas: canvas,             // ← this line is REQUIRED
             viewport,
           }).promise;
 
