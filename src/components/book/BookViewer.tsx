@@ -48,7 +48,11 @@ export default function BookViewer() {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+        await page.render({
+          canvasContext: ctx,
+          canvas,
+          viewport,
+        } as any).promise;
         images.push(canvas.toDataURL("image/jpeg", 0.9));
       }
 
