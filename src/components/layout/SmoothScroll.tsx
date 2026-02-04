@@ -9,7 +9,7 @@ export default function SmoothScroll({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const lenis = new Lenis({ smooth: true });
+    const lenis = new Lenis();
 
     function raf(time: number) {
       lenis.raf(time);
