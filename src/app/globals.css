@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* 🎨 Design System */
+:root {
+  --bg-main: #F0EADC;
+  --text-main: #576238;
+
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/* Prevent scroll bounce */
+html {
+  overscroll-behavior-y: none;
+}
+
+/* Apply theme to entire app */
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  font-family: var(--font-sans);
+}
