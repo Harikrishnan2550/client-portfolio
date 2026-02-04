@@ -86,16 +86,17 @@ export default function BookViewer() {
         ref={bookRef}
         width={dimensions.width}
         height={dimensions.height}
-        size="fixed"                    // or "stretch" if preferred
-        minWidth={isMobile ? 280 : 400}   // ← added required min/max
+        size="fixed"
+        minWidth={isMobile ? 280 : 400}    // ← required for fixed size
         maxWidth={600}
         minHeight={380}
         maxHeight={850}
-        showCover={true}                // ← boolean, not just prop presence
+        showCover={true}                    // ← explicit boolean
         usePortrait={isMobile}
         mobileScrollSupport={false}
         flippingTime={700}
         drawShadow={true}
+        startPage={0}                       // ← add this (common default)
         className="shadow-2xl rounded-xl border border-gray-200 bg-[#F0EADC]"
       >
         {pageImages.map((src, i) => (
