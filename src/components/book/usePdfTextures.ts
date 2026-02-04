@@ -24,7 +24,13 @@ export function usePdfTextures(pdfUrl: string) {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        await page.render({ canvasContext: context, viewport }).promise;
+const renderContext: any = {
+  canvasContext: context,
+  canvas: canvas,
+  viewport,
+};
+
+await page.render(renderContext).promise;
 
         const texture = new THREE.CanvasTexture(canvas);
         texture.flipY = false;
