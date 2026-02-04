@@ -1,9 +1,12 @@
 "use client";
 
 import HTMLFlipBookImport from "react-pageflip";
-const HTMLFlipBook: any = HTMLFlipBookImport;
+import type { ComponentType } from "react";
+const HTMLFlipBook = HTMLFlipBookImport as unknown as ComponentType<any>;
+
 import { pdfjs } from "react-pdf";
 import { useEffect, useState, useRef } from "react";
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
