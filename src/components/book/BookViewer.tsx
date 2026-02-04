@@ -1,12 +1,8 @@
 "use client";
 
-import HTMLFlipBookImport from "react-pageflip";
-import type { ComponentType } from "react";
-const HTMLFlipBook = HTMLFlipBookImport as unknown as ComponentType<any>;
-
+import HTMLFlipBook from "react-pageflip";
 import { pdfjs } from "react-pdf";
 import { useEffect, useState, useRef } from "react";
-
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -58,10 +54,9 @@ export default function BookViewer() {
           canvas.width = viewport.width;
           canvas.height = viewport.height;
 
-          // FIXED: must include BOTH canvasContext and canvas
           await page.render({
             canvasContext: ctx,
-            canvas: canvas,             // ← this line is REQUIRED
+            canvas: canvas,
             viewport,
           }).promise;
 
@@ -91,12 +86,16 @@ export default function BookViewer() {
         ref={bookRef}
         width={dimensions.width}
         height={dimensions.height}
-        size="fixed"
-        showCover
+        size="fixed"                    // or "stretch" if preferred
+        minWidth={isMobile ? 280 : 400}   // ← added required min/max
+        maxWidth={600}
+        minHeight={380}
+        maxHeight={850}
+        showCover={true}                // ← boolean, not just prop presence
         usePortrait={isMobile}
         mobileScrollSupport={false}
         flippingTime={700}
-        drawShadow
+        drawShadow={true}
         className="shadow-2xl rounded-xl border border-gray-200 bg-[#F0EADC]"
       >
         {pageImages.map((src, i) => (
