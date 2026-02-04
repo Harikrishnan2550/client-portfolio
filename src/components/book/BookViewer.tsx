@@ -17,7 +17,7 @@ export default function BookViewer() {
   const [dimensions, setDimensions] = useState({ width: 460, height: 650 });
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect device once
+  // Detect mobile & set dimensions once
   useEffect(() => {
     const mobile = window.innerWidth < 768;
     setIsMobile(mobile);
@@ -29,36 +29,45 @@ export default function BookViewer() {
     });
   }, []);
 
-  // Load PDF only once
+  // Load PDF → convert pages to images (only once)
   useEffect(() => {
     if (loadedRef.current) return;
     loadedRef.current = true;
 
     const loadPdf = async () => {
-      const pdf = await pdfjs.getDocument("/user_compressed.pdf").promise;
+      try {
+        const pdf = await pdfjs.getDocument("/user_compressed.pdf").promise;
 
-      const images: string[] = [];
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d")!;
+        const images: string[] = [];
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
 
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 1.5 });
+        if (!ctx) {
+          console.error("Failed to get canvas context");
+          return;
+        }
 
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 1.5 });
 
-// @ts-ignore
-await page.render({
-  canvasContext: ctx,
-  canvas: canvas,
-  viewport,
-}).promise;
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
 
-        images.push(canvas.toDataURL("image/jpeg", 0.9));
+          // Important: pass BOTH canvas and canvasContext
+          await page.render({
+            canvasContext: ctx,
+            canvas: canvas,           // ← required by newer pdfjs
+            viewport,
+          }).promise;
+
+          images.push(canvas.toDataURL("image/jpeg", 0.9));
+        }
+
+        setPageImages(images);
+      } catch (err) {
+        console.error("PDF loading failed:", err);
       }
-
-      setPageImages(images);
     };
 
     loadPdf();
