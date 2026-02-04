@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
+  import.meta.url,
 ).toString();
 
 export default function BookViewer() {
@@ -48,7 +48,7 @@ export default function BookViewer() {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        await page.render({ canvasContext: ctx, viewport, canvas }).promise;
         images.push(canvas.toDataURL("image/jpeg", 0.9));
       }
 
