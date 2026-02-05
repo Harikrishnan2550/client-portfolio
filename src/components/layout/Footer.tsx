@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="w-full px-6 md:px-20 py-24 flex flex-col md:flex-row justify-between gap-16">
+    <footer className="w-full px-6 md:px-20  flex flex-col md:flex-row justify-between gap-16 mb-16">
       {/* LEFT SIDE */}
       <div className="space-y-6">
         <p className="font-serif text-3xl md:text-5xl italic">

@@ -10,7 +10,7 @@ const BookViewer = dynamic(() => import("../book/BookViewer"), {
 export default function Booklet() {
   return (
     <section
-      className="py-32 px-6 md:px-20 text-center"
+      className="py-12 md:py-24 px-6 md:px-20 text-center"
       style={{
         minHeight: "120vh",     // ← locks height so browser doesn’t recalc
         contain: "layout style", // ← prevents flip DOM from affecting page layout
@@ -20,7 +20,7 @@ export default function Booklet() {
         Project Monograph
       </h2>
 
-      <p className="max-w-2xl mx-auto text-lg md:text-xl text-neutral-500 mb-24">
+      <p className="max-w-2xl mx-auto text-lg md:text-xl text-neutral-500 mb-16">
         Drawings, spatial studies, and narrative documentation presented as
         a digital architecture book.
       </p>
