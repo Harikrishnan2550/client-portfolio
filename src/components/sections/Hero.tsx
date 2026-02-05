@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen px-6 md:px-20 pt-40 overflow-hidden">
+    <section className="relative min-h-screen px-6 md:px-20 pt-28 md:pt-40 overflow-hidden">
 
       {/* Mobile layout – unchanged */}
       <div className="block md:hidden">
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center ">
           {/* PORTFOLIO - top */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
